@@ -40,7 +40,7 @@
 
 - (IBAction)didPressRoute:(UIButton *)sender
 {
-    CLLocationCoordinate2D bontouchCoordinate = CLLocationCoordinate2DMake(59.338125, 18.057679);
+    CLLocationCoordinate2D bontouchCoordinate = CLLocationCoordinate2DMake(59.314951, 18.071176);
     [self.mapViewController startRoutingToDestination:bontouchCoordinate];
 }
 
