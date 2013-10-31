@@ -14,9 +14,11 @@
 
 @property (strong, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) LocationManager *locationManager;
-@property (assign, nonatomic) CLLocationCoordinate2D destination;
+@property (assign, nonatomic) CLLocationCoordinate2D destinationCoordinate;
 @property (assign, nonatomic) BOOL locationAvailable;
 @property (strong, nonatomic) MKPointAnnotation *destinationAnnotation;
+@property (strong, nonatomic) MKDirectionsRequest *request;
+@property (strong, nonatomic) MKDirectionsResponse *directionsResponse;
 
 @end
 
@@ -92,16 +94,21 @@
     if (_locationAvailable != locationAvailable) {
         _locationAvailable = locationAvailable;
         self.mapView.showsUserLocation = locationAvailable;
+        [self updateVisibleRegion];
     }
 }
 
 #pragma mark - Route
 
+#pragma mark Destination annotation
+
 - (void)addDestinationAnnotation
 {
-    self.destinationAnnotation = [[MKPointAnnotation alloc] init];
-    self.destinationAnnotation.coordinate = self.destination;
-    [self.mapView addAnnotation:self.destinationAnnotation];
+    if (!self.destinationAnnotation) {
+        self.destinationAnnotation = [[MKPointAnnotation alloc] init];
+        self.destinationAnnotation.coordinate = self.destinationCoordinate;
+        [self.mapView addAnnotation:self.destinationAnnotation];
+    }
 }
 
 - (void)removeDestinationAnnotation
@@ -112,15 +119,64 @@
     }
 }
 
-- (void)startRoutingToDestination:(CLLocationCoordinate2D)destination
+#pragma mark Update visible region
+
+- (void)updateVisibleRegion
 {
-    self.destination = destination;
+    BOOL locationAvailable = self.locationAvailable;
+    BOOL destinationAnnotationAvailable = (self.destinationAnnotation != nil);
+    BOOL userAnnotationAvailable = (self.mapView.userLocation != nil);
+    if (locationAvailable && destinationAnnotationAvailable && userAnnotationAvailable) {
+        id <MKAnnotation> annotation1 = self.destinationAnnotation;
+        id <MKAnnotation> annotation2 = self.mapView.userLocation;
+        [self.mapView showAnnotations:@[annotation1, annotation2] animated:YES];
+    } else {
+        if (self.destinationAnnotation) {
+            id <MKAnnotation> annotation = self.destinationAnnotation;
+            [self.mapView showAnnotations:@[annotation] animated:YES];
+        }
+    }
+}
+
+- (void)startRoutingToDestinationCoordinate:(CLLocationCoordinate2D)destinationCoordinate
+{
+    self.destinationCoordinate = destinationCoordinate;
     [self addDestinationAnnotation];
+    [self updateVisibleRegion];
 }
 
 - (void)stopRouting
 {
     [self removeDestinationAnnotation];
+}
+
+#pragma mark - Map directions
+
+- (void)findDirectionsFrom:(MKMapItem *)source to:(MKMapItem *)destination
+{
+    self.request = [[MKDirectionsRequest alloc] init];
+    [self.request setSource:source];
+    [self.request setDestination:destination];
+    self.request.requestsAlternateRoutes = YES;
+    
+    MKDirections *directions = [[MKDirections alloc] initWithRequest:self.request];
+    [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error) {
+        if (error) {
+            NSAssert(NO, @"");
+        } else {
+            [self showDirectionsWithDirectionsResponsee:response];
+        }
+    }];
+}
+
+- (void)showDirectionsWithDirectionsResponsee:(MKDirectionsResponse *)directionsResponse
+{
+    self.directionsResponse = directionsResponse;
+    for (MKRoute *route in self.directionsResponse.routes) {
+//        NSString *text = self.textField.text;
+//        NSString *updateText = [text stringByAppendingString:route];
+        [self.mapView addOverlay:route.polyline level:MKOverlayLevelAboveRoads];
+    }
 }
 
 #pragma mark - Map view delegate
@@ -201,14 +257,10 @@
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay
 {
-#if 0
     MKPolylineRenderer *renderer = [[MKPolylineRenderer alloc] initWithOverlay:overlay];
     renderer.strokeColor = [UIColor purpleColor];
     renderer.lineWidth = 5.0;
-    [self.view setNeedsDisplay];
     return renderer;
-#endif
-    return nil;
 }
 
 - (void)mapView:(MKMapView *)mapView didAddOverlayRenderers:(NSArray *)renderers

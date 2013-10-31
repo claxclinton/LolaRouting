@@ -16,7 +16,7 @@
 @property (weak, nonatomic) id <MapViewControllerDelegate> delegate;
 
 - (id)init;
-- (void)startRoutingToDestination:(CLLocationCoordinate2D)destination;
+- (void)startRoutingToDestinationCoordinate:(CLLocationCoordinate2D)destinationCoordinate;
 - (void)stopRouting;
 
 @end
