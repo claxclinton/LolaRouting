@@ -21,6 +21,10 @@
 		4B5782AA18227BB4009ECEC8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B57828C18227BB4009ECEC8 /* UIKit.framework */; };
 		4B5782B218227BB4009ECEC8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4B5782B018227BB4009ECEC8 /* InfoPlist.strings */; };
 		4B5782B418227BB4009ECEC8 /* LolaRouteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5782B318227BB4009ECEC8 /* LolaRouteTests.m */; };
+		4B5782BE18227BBB009ECEC8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B5782BD18227BBB009ECEC8 /* MapKit.framework */; };
+		4B5782C018227BD3009ECEC8 /* routeToLola.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 4B5782BF18227BD3009ECEC8 /* routeToLola.gpx */; };
+		4BC4E1C618227C59000DD9F5 /* placeBontouch.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 4BC4E1C518227C59000DD9F5 /* placeBontouch.gpx */; };
+		4BC4E1C818227DAB000DD9F5 /* placeLola.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 4BC4E1C718227DAB000DD9F5 /* placeLola.gpx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,10 @@
 		4B5782AF18227BB4009ECEC8 /* LolaRouteTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LolaRouteTests-Info.plist"; sourceTree = "<group>"; };
 		4B5782B118227BB4009ECEC8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4B5782B318227BB4009ECEC8 /* LolaRouteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LolaRouteTests.m; sourceTree = "<group>"; };
+		4B5782BD18227BBB009ECEC8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		4B5782BF18227BD3009ECEC8 /* routeToLola.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = routeToLola.gpx; sourceTree = "<group>"; };
+		4BC4E1C518227C59000DD9F5 /* placeBontouch.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = placeBontouch.gpx; sourceTree = "<group>"; };
+		4BC4E1C718227DAB000DD9F5 /* placeLola.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = placeLola.gpx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +70,7 @@
 			files = (
 				4B57828B18227BB4009ECEC8 /* CoreGraphics.framework in Frameworks */,
 				4B57828D18227BB4009ECEC8 /* UIKit.framework in Frameworks */,
+				4B5782BE18227BBB009ECEC8 /* MapKit.framework in Frameworks */,
 				4B57828918227BB4009ECEC8 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -101,6 +110,7 @@
 		4B57828718227BB4009ECEC8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4B5782BD18227BBB009ECEC8 /* MapKit.framework */,
 				4B57828818227BB4009ECEC8 /* Foundation.framework */,
 				4B57828A18227BB4009ECEC8 /* CoreGraphics.framework */,
 				4B57828C18227BB4009ECEC8 /* UIKit.framework */,
@@ -112,6 +122,9 @@
 		4B57828E18227BB4009ECEC8 /* LolaRoute */ = {
 			isa = PBXGroup;
 			children = (
+				4B5782BF18227BD3009ECEC8 /* routeToLola.gpx */,
+				4BC4E1C518227C59000DD9F5 /* placeBontouch.gpx */,
+				4BC4E1C718227DAB000DD9F5 /* placeLola.gpx */,
 				4B57829718227BB4009ECEC8 /* AppDelegate.h */,
 				4B57829818227BB4009ECEC8 /* AppDelegate.m */,
 				4B57829A18227BB4009ECEC8 /* Main.storyboard */,
@@ -199,6 +212,13 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Claes Lillieskold";
 				TargetAttributes = {
+					4B57828418227BB4009ECEC8 = {
+						SystemCapabilities = {
+							com.apple.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 					4B5782A518227BB4009ECEC8 = {
 						TestTargetID = 4B57828418227BB4009ECEC8;
 					};
@@ -229,7 +249,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B5782A118227BB4009ECEC8 /* Images.xcassets in Resources */,
+				4B5782C018227BD3009ECEC8 /* routeToLola.gpx in Resources */,
 				4B57829318227BB4009ECEC8 /* InfoPlist.strings in Resources */,
+				4BC4E1C818227DAB000DD9F5 /* placeLola.gpx in Resources */,
+				4BC4E1C618227C59000DD9F5 /* placeBontouch.gpx in Resources */,
 				4B57829C18227BB4009ECEC8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -460,6 +483,7 @@
 				4B5782B918227BB4009ECEC8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4B5782BA18227BB4009ECEC8 /* Build configuration list for PBXNativeTarget "LolaRouteTests" */ = {
 			isa = XCConfigurationList;
@@ -468,6 +492,7 @@
 				4B5782BC18227BB4009ECEC8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

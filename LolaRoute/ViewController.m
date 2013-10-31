@@ -26,4 +26,23 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - User interaction
+
+- (IBAction)didSwitchLocation:(UISwitch *)sender
+{
+}
+
+- (IBAction)didPressResetButton:(UIButton *)sender
+{
+}
+
+- (IBAction)didPressRoute:(UIButton *)sender
+{
+}
+
+- (IBAction)didPressMaps:(UIButton *)sender
+{
+}
+
+
 @end

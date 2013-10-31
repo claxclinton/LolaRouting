@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx
+  version="1.0"
+  creator="GPSBabel - http://www.gpsbabel.org"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.topografix.com/GPX/1/0"
+  xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd">
+<time>2013-10-31T11:49:50Z</time>
+<bounds minlat="59.316685000" minlon="18.057463000" maxlat="59.337933000" maxlon="18.070852000"/>
+<wpt lat="59.337933000" lon="18.057520000">
+  <ele>0.000000</ele>
+  <name>From: Drottninggatan 98, Stockholm, Sweden</name>
+  <cmt>From: Drottninggatan 98, Stockholm, Sweden</cmt>
+  <desc>From: Drottninggatan 98, Stockholm, Sweden</desc>
+</wpt>
+<wpt lat="59.316685000" lon="18.070852000">
+  <ele>0.000000</ele>
+  <name>To: Lolas Spel och Tobak@59.3167251017617,18.071136474609375</name>
+  <cmt>To: Lolas Spel och Tobak@59.3167251017617,18.071136474609375</cmt>
+  <desc>To: Lolas Spel och Tobak@59.3167251017617,18.071136474609375</desc>
+</wpt>
+<wpt lat="59.337852000" lon="18.057463000">
+  <ele>0.000000</ele>
+  <name>From: Drottninggatan 98, Stockholm, Sweden</name>
+  <cmt>From: Drottninggatan 98, Stockholm, Sweden</cmt>
+  <desc>From: Drottninggatan 98, Stockholm, Sweden</desc>
+</wpt>
+<wpt lat="59.316685000" lon="18.070852000">
+  <ele>0.000000</ele>
+  <name>To: Lolas Spel och Tobak@59.3167251017617,18.071136474609375</name>
+  <cmt>To: Lolas Spel och Tobak@59.3167251017617,18.071136474609375</cmt>
+  <desc>To: Lolas Spel och Tobak@59.3167251017617,18.071136474609375</desc>
+</wpt>
+<trk>
+  <name>Walking directions to Lolas Spel och Tobak@59.3167251017617,18.071136474609375</name>
+<trkseg>
+<trkpt lat="59.337852000" lon="18.057463000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.330311000" lon="18.064947000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.328465000" lon="18.066830000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.328465000" lon="18.066830000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.327885000" lon="18.067425000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.327885000" lon="18.067425000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.327087000" lon="18.068243000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.327087000" lon="18.068243000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.326721000" lon="18.068604000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.326721000" lon="18.068604000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.326481000" lon="18.068037000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.326134000" lon="18.067373000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.325966000" lon="18.067186000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.325966000" lon="18.067186000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.325489000" lon="18.066151000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.325489000" lon="18.066151000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.325497000" lon="18.065996000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.325439000" lon="18.065765000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.325089000" lon="18.064960000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.325089000" lon="18.064960000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.324738000" lon="18.065229000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.324612000" lon="18.065208000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.324532000" lon="18.065113000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.324532000" lon="18.065113000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.324497000" lon="18.065603000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.324055000" lon="18.065910000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.324055000" lon="18.065910000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.323730000" lon="18.066128000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.323730000" lon="18.066128000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.322807000" lon="18.066677000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.322807000" lon="18.066677000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.321121000" lon="18.067648000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.321121000" lon="18.067648000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.320930000" lon="18.067680000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.320457000" lon="18.067884000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.320118000" lon="18.067577000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.319599000" lon="18.067823000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.319626000" lon="18.068178000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.319626000" lon="18.068178000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.319115000" lon="18.068405000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.319092000" lon="18.068457000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.319218000" lon="18.069532000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.319218000" lon="18.069532000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.318428000" lon="18.069851000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.318436000" lon="18.069925000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.318436000" lon="18.069925000">
+  <ele>0.000000</ele>
+</trkpt>
+<trkpt lat="59.316685000" lon="18.070852000">
+  <ele>0.000000</ele>
+</trkpt>
+</trkseg>
+</trk>
+</gpx>
