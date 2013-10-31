@@ -52,12 +52,15 @@
             break;
         case kLocationManagerStateActivated:
             NSLog(@"BBB Activated");
+            self.mapView.showsUserLocation = YES;
             break;
         case kLocationManagerStateProhibited:
             NSLog(@"BBB Prohibited");
+            self.mapView.showsUserLocation = NO;
             break;
         case kLocationManagerStateDeactivated:
             NSLog(@"BBB Deactivated");
+            self.mapView.showsUserLocation = NO;
             break;
         default:
             break;
