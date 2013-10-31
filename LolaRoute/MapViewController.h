@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 @protocol MapViewControllerDelegate;
 
@@ -15,5 +16,7 @@
 @property (weak, nonatomic) id <MapViewControllerDelegate> delegate;
 
 - (id)init;
+- (void)startRoutingToDestination:(CLLocationCoordinate2D)destination;
+- (void)stopRouting;
 
 @end

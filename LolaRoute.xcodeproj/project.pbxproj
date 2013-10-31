@@ -130,9 +130,7 @@
 		4B57828E18227BB4009ECEC8 /* LolaRoute */ = {
 			isa = PBXGroup;
 			children = (
-				4B5782BF18227BD3009ECEC8 /* routeToLola.gpx */,
-				4BC4E1C518227C59000DD9F5 /* placeBontouch.gpx */,
-				4BC4E1C718227DAB000DD9F5 /* placeLola.gpx */,
+				4B6E7B311822EC5E0067F5A9 /* Locations */,
 				4B57829718227BB4009ECEC8 /* AppDelegate.h */,
 				4B57829818227BB4009ECEC8 /* AppDelegate.m */,
 				4B57829A18227BB4009ECEC8 /* Main.storyboard */,
@@ -176,6 +174,16 @@
 				4B5782B018227BB4009ECEC8 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4B6E7B311822EC5E0067F5A9 /* Locations */ = {
+			isa = PBXGroup;
+			children = (
+				4B5782BF18227BD3009ECEC8 /* routeToLola.gpx */,
+				4BC4E1C518227C59000DD9F5 /* placeBontouch.gpx */,
+				4BC4E1C718227DAB000DD9F5 /* placeLola.gpx */,
+			);
+			name = Locations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

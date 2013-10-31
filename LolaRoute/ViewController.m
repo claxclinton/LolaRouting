@@ -21,9 +21,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _mapViewController = [[MapViewController alloc] init];
-    [_mapViewContainer addSubview:_mapViewController.view];
-    _mapViewController.view.frame = _mapViewContainer.bounds;
+    self.mapViewController = [[MapViewController alloc] init];
+    [self.mapViewContainer addSubview:_mapViewController.view];
+    self.mapViewController.view.frame = _mapViewContainer.bounds;
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,6 +40,8 @@
 
 - (IBAction)didPressRoute:(UIButton *)sender
 {
+    CLLocationCoordinate2D bontouchCoordinate = CLLocationCoordinate2DMake(59.338125, 18.057679);
+    [self.mapViewController startRoutingToDestination:bontouchCoordinate];
 }
 
 - (IBAction)didPressMaps:(UIButton *)sender
