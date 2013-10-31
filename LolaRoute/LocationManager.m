@@ -46,6 +46,9 @@ typedef enum {
     self.requestedState = kRequestedStateActivated;
     if (self.permissionState == kPermissionStateAllowed) {
         [self startUpdatingLocation];
+        [self.delegate locationManager:self changedToState:kLocationManagerStateRequestPermission];
+    } else {
+        [self.delegate locationManager:self changedToState:kLocationManagerStateProhibited];
     }
 }
 
@@ -53,6 +56,7 @@ typedef enum {
 {
     self.requestedState = kRequestedStateDeactivated;
     [self stopUpdatingLocation];
+    [self.delegate locationManager:self changedToState:kLocationManagerStateDeactivated];
 }
 
 - (void)startUpdatingLocation
@@ -82,6 +86,61 @@ typedef enum {
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     NSLog(@"%s: Locations:%@",__PRETTY_FUNCTION__, locations);
+}
+
+#pragma mark Error and permissions
+
+/*
+ *  locationManager:didFailWithError:
+ *
+ *  Discussion:
+ *    Invoked when an error has occurred. Error types are defined in "CLError.h".
+ */
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"%s: Error %@",__PRETTY_FUNCTION__, error);
+}
+
+/*
+ *  locationManager:didChangeAuthorizationStatus:
+ *
+ *  Discussion:
+ *    Invoked when the authorization status changes for this application.
+ */
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    NSLog(@"%s",__PRETTY_FUNCTION__);
+    switch (status) {
+        case kCLAuthorizationStatusNotDetermined:
+            break;
+        case kCLAuthorizationStatusRestricted:
+        case kCLAuthorizationStatusDenied:
+            self.permissionState = kPermissionStateProhibited;
+            if (self.requestedState == kRequestedStateActivated) {
+                [self.delegate locationManager:self changedToState:kLocationManagerStateProhibited];
+            }
+            break;
+        case kCLAuthorizationStatusAuthorized:
+            self.permissionState = kPermissionStateAllowed;
+            if (self.requestedState == kRequestedStateActivated) {
+                [self startUpdatingLocation];
+                [self.delegate locationManager:self changedToState:kLocationManagerStateActivated];
+            }
+            break;
+    }
+}
+
+#pragma mark Region
+
+/*
+ *  locationManager:didStartMonitoringForRegion:
+ *
+ *  Discussion:
+ *    Invoked when a monitoring for a region started successfully.
+ */
+- (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region
+{
+    NSLog(@"%s",__PRETTY_FUNCTION__);
 }
 
 /*
@@ -122,17 +181,6 @@ typedef enum {
 }
 
 /*
- *  locationManager:didFailWithError:
- *
- *  Discussion:
- *    Invoked when an error has occurred. Error types are defined in "CLError.h".
- */
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-    NSLog(@"%s: Error %@",__PRETTY_FUNCTION__, error);
-}
-
-/*
  *  locationManager:monitoringDidFailForRegion:withError:
  *
  *  Discussion:
@@ -144,45 +192,7 @@ typedef enum {
     NSLog(@"%s",__PRETTY_FUNCTION__);
 }
 
-/*
- *  locationManager:didChangeAuthorizationStatus:
- *
- *  Discussion:
- *    Invoked when the authorization status changes for this application.
- */
-- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
-{
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-    switch (status) {
-        case kCLAuthorizationStatusNotDetermined:
-            break;
-        case kCLAuthorizationStatusRestricted:
-            self.permissionState = kPermissionStateProhibited;
-            [self stopUpdatingLocation];
-            break;
-        case kCLAuthorizationStatusDenied:
-            self.permissionState = kPermissionStateProhibited;
-            [self stopUpdatingLocation];
-            break;
-        case kCLAuthorizationStatusAuthorized:
-            self.permissionState = kPermissionStateAllowed;
-            if (self.requestedState == kRequestedStateActivated) {
-                [self startUpdatingLocation];
-            }
-            break;
-    }
-}
-
-/*
- *  locationManager:didStartMonitoringForRegion:
- *
- *  Discussion:
- *    Invoked when a monitoring for a region started successfully.
- */
-- (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region
-{
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-}
+#pragma mark Pause, resume and deferred updates
 
 /*
  *  Discussion:

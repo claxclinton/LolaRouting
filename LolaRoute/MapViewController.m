@@ -44,10 +44,25 @@
 
 #pragma mark - Location manager delegate
 
-- (void)locationManager:(LocationManager *)locationManager currentLocationAvailable:(BOOL)locationAvailable updatingLocation:(BOOL)updatingLocation
+- (void)locationManager:(LocationManager *)locationManager changedToState:(kLocationManagerState)state
 {
+    switch (state) {
+        case kLocationManagerStateRequestPermission:
+            NSLog(@"BBB RequestPermissions");
+            break;
+        case kLocationManagerStateActivated:
+            NSLog(@"BBB Activated");
+            break;
+        case kLocationManagerStateProhibited:
+            NSLog(@"BBB Prohibited");
+            break;
+        case kLocationManagerStateDeactivated:
+            NSLog(@"BBB Deactivated");
+            break;
+        default:
+            break;
+    }
 }
-
 - (void)locationManager:(LocationManager *)locationManager movedToLocation:(CLLocation *)location
 {
     MKCoordinateSpan span = MKCoordinateSpanMake(.1, .1);

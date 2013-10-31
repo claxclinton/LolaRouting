@@ -11,6 +11,13 @@
 @class CLLocation;
 @protocol LocationManagerDelegate;
 
+typedef enum {
+    kLocationManagerStateRequestPermission = 1,
+    kLocationManagerStateActivated = 2,
+    kLocationManagerStateProhibited = 3,
+    kLocationManagerStateDeactivated = 4
+} kLocationManagerState;
+
 @interface LocationManager : NSObject
 
 @property (weak, nonatomic) id <LocationManagerDelegate> delegate;
@@ -25,8 +32,7 @@
 
 @protocol LocationManagerDelegate
 
-- (void)locationManager:(LocationManager *)locationManager currentLocationAvailable:(BOOL)locationAvailable
-       updatingLocation:(BOOL)updatingLocation;
+- (void)locationManager:(LocationManager *)locationManager changedToState:(kLocationManagerState)state;
 - (void)locationManager:(LocationManager *)locationManager movedToLocation:(CLLocation *)location;
 
 @end
