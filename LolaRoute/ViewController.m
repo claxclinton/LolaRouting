@@ -7,8 +7,12 @@
 //
 
 #import "ViewController.h"
+#import "MapViewController.h"
 
 @interface ViewController ()
+
+@property (strong, nonatomic) MapViewController *mapViewController;
+@property (strong, nonatomic) IBOutlet UIView *mapViewContainer;
 
 @end
 
@@ -17,7 +21,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    _mapViewController = [[MapViewController alloc] init];
+    [_mapViewContainer addSubview:_mapViewController.view];
+    _mapViewController.view.frame = _mapViewContainer.bounds;
 }
 
 - (void)didReceiveMemoryWarning
@@ -27,10 +33,6 @@
 }
 
 #pragma mark - User interaction
-
-- (IBAction)didSwitchLocation:(UISwitch *)sender
-{
-}
 
 - (IBAction)didPressResetButton:(UIButton *)sender
 {
@@ -43,6 +45,5 @@
 - (IBAction)didPressMaps:(UIButton *)sender
 {
 }
-
 
 @end

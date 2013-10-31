@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B3871D11822B1A400E6A7FE /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4B3871D01822B1A400E6A7FE /* MapViewController.xib */; };
 		4B57828918227BB4009ECEC8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B57828818227BB4009ECEC8 /* Foundation.framework */; };
 		4B57828B18227BB4009ECEC8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B57828A18227BB4009ECEC8 /* CoreGraphics.framework */; };
 		4B57828D18227BB4009ECEC8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B57828C18227BB4009ECEC8 /* UIKit.framework */; };
@@ -23,6 +24,8 @@
 		4B5782B418227BB4009ECEC8 /* LolaRouteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B5782B318227BB4009ECEC8 /* LolaRouteTests.m */; };
 		4B5782BE18227BBB009ECEC8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B5782BD18227BBB009ECEC8 /* MapKit.framework */; };
 		4B5782C018227BD3009ECEC8 /* routeToLola.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 4B5782BF18227BD3009ECEC8 /* routeToLola.gpx */; };
+		4B9C0E0B18228E90005695DA /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C0E0A18228E90005695DA /* LocationManager.m */; };
+		4B9C0E0F182292A0005695DA /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9C0E0E182292A0005695DA /* MapViewController.m */; };
 		4BC4E1C618227C59000DD9F5 /* placeBontouch.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 4BC4E1C518227C59000DD9F5 /* placeBontouch.gpx */; };
 		4BC4E1C818227DAB000DD9F5 /* placeLola.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 4BC4E1C718227DAB000DD9F5 /* placeLola.gpx */; };
 /* End PBXBuildFile section */
@@ -38,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4B3871D01822B1A400E6A7FE /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		4B57828518227BB4009ECEC8 /* LolaRoute.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LolaRoute.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B57828818227BB4009ECEC8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4B57828A18227BB4009ECEC8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -59,6 +63,10 @@
 		4B5782B318227BB4009ECEC8 /* LolaRouteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LolaRouteTests.m; sourceTree = "<group>"; };
 		4B5782BD18227BBB009ECEC8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		4B5782BF18227BD3009ECEC8 /* routeToLola.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = routeToLola.gpx; sourceTree = "<group>"; };
+		4B9C0E0918228E90005695DA /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		4B9C0E0A18228E90005695DA /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
+		4B9C0E0D182292A0005695DA /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		4B9C0E0E182292A0005695DA /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		4BC4E1C518227C59000DD9F5 /* placeBontouch.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = placeBontouch.gpx; sourceTree = "<group>"; };
 		4BC4E1C718227DAB000DD9F5 /* placeLola.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = placeLola.gpx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -130,6 +138,11 @@
 				4B57829A18227BB4009ECEC8 /* Main.storyboard */,
 				4B57829D18227BB4009ECEC8 /* ViewController.h */,
 				4B57829E18227BB4009ECEC8 /* ViewController.m */,
+				4B9C0E0D182292A0005695DA /* MapViewController.h */,
+				4B9C0E0E182292A0005695DA /* MapViewController.m */,
+				4B3871D01822B1A400E6A7FE /* MapViewController.xib */,
+				4B9C0E0918228E90005695DA /* LocationManager.h */,
+				4B9C0E0A18228E90005695DA /* LocationManager.m */,
 				4B5782A018227BB4009ECEC8 /* Images.xcassets */,
 				4B57828F18227BB4009ECEC8 /* Supporting Files */,
 			);
@@ -252,6 +265,7 @@
 				4B5782C018227BD3009ECEC8 /* routeToLola.gpx in Resources */,
 				4B57829318227BB4009ECEC8 /* InfoPlist.strings in Resources */,
 				4BC4E1C818227DAB000DD9F5 /* placeLola.gpx in Resources */,
+				4B3871D11822B1A400E6A7FE /* MapViewController.xib in Resources */,
 				4BC4E1C618227C59000DD9F5 /* placeBontouch.gpx in Resources */,
 				4B57829C18227BB4009ECEC8 /* Main.storyboard in Resources */,
 			);
@@ -272,7 +286,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B9C0E0B18228E90005695DA /* LocationManager.m in Sources */,
 				4B57829F18227BB4009ECEC8 /* ViewController.m in Sources */,
+				4B9C0E0F182292A0005695DA /* MapViewController.m in Sources */,
 				4B57829918227BB4009ECEC8 /* AppDelegate.m in Sources */,
 				4B57829518227BB4009ECEC8 /* main.m in Sources */,
 			);
