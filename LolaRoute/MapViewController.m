@@ -63,6 +63,7 @@
             break;
     }
 }
+
 - (void)locationManager:(LocationManager *)locationManager movedToLocation:(CLLocation *)location
 {
     MKCoordinateSpan span = MKCoordinateSpanMake(.1, .1);

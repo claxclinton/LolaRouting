@@ -9,6 +9,10 @@
 #import <CoreLocation/CoreLocation.h>
 #import "LocationManager.h"
 
+#define kDefaultDistanceFilter   10.0
+#define kDefaultDesiredAccuracy  5.0
+#define kDefaultActivityType     CLActivityTypeOther
+
 typedef enum {
     kRequestedStateActivated = 1,
     kRequestedStateDeactivated = 2,
@@ -36,6 +40,9 @@ typedef enum {
         _requestedState = kRequestedStateDeactivated;
         _permissionState = kPermissionStateAllowed;
         _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.distanceFilter = kDefaultDistanceFilter;
+        _locationManager.desiredAccuracy = kDefaultDesiredAccuracy;
+        _locationManager.activityType = kDefaultActivityType;
         _locationManager.delegate = self;
     }
     return self;
@@ -86,6 +93,7 @@ typedef enum {
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     NSLog(@"%s: Locations:%@",__PRETTY_FUNCTION__, locations);
+    [self.delegate locationManager:self movedToLocation:[locations lastObject]];
 }
 
 #pragma mark Error and permissions
