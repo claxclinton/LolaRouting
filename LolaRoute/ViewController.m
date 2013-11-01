@@ -50,6 +50,7 @@
 
 - (IBAction)didPressMaps:(UIButton *)sender
 {
+    [self.mapViewController openMapsWithStatus:nil];
 }
 
 #pragma mark - Map view controller delegate

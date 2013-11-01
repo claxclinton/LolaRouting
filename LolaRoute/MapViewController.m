@@ -20,6 +20,7 @@
 @property (strong, nonatomic) MKDirectionsRequest *request;
 @property (strong, nonatomic) MKDirectionsResponse *directionsResponse;
 @property (assign, nonatomic) BOOL shouldStartRouting;
+@property (strong, nonatomic) MKPolyline *routePolyLine;
 
 @end
 
@@ -34,6 +35,7 @@
         _locationAvailable = NO;
         _locationManager = [[LocationManager alloc] init];
         _locationManager.delegate = self;
+        _destinationCoordinate = kCLLocationCoordinate2DInvalid;
         [_locationManager activate];
     }
     return self;
@@ -98,8 +100,12 @@
         [self updateVisibleRegion];
     }
     
-    if (locationAvailable && self.shouldStartRouting) {
-        [self startRouting];
+    if (locationAvailable) {
+        if (self.shouldStartRouting) {
+            [self startRouting];
+        }
+    } else {
+        [self removeRoutePolyLine];
     }
 }
 
@@ -124,6 +130,41 @@
     }
 }
 
+#pragma mark Route polyline overlay
+
+- (void)addRoutePolyline
+{
+    [self.mapView addOverlay:self.routePolyLine level:MKOverlayLevelAboveRoads];
+}
+
+- (void)removeRoutePolyLine
+{
+    [self.mapView removeOverlay:self.routePolyLine];
+}
+
+#pragma mark Map items
+
+- (MKMapItem *)userLocationMapItem
+{
+    CLLocationCoordinate2D userLocationCoordinate = self.mapView.userLocation.coordinate;
+    MKPlacemark *userLocationPlacemark = [[MKPlacemark alloc] initWithCoordinate:userLocationCoordinate addressDictionary:nil];
+    MKMapItem *userLocationMapItem = [[MKMapItem alloc] initWithPlacemark:userLocationPlacemark];
+    userLocationMapItem.name = @"Me";
+    NSAssert(userLocationMapItem != nil, @"The caller is responsible of just requesting this if available.");
+    return userLocationMapItem;
+}
+
+- (MKMapItem *)destinationMapItem
+{
+    CLLocationCoordinate2D destinationCoordinate = self.destinationCoordinate;
+    MKPlacemark *destinationPlacemark = [[MKPlacemark alloc]
+                                         initWithCoordinate:destinationCoordinate addressDictionary:nil];
+    MKMapItem *destinationMapItem = [[MKMapItem alloc] initWithPlacemark:destinationPlacemark];
+    destinationMapItem.name = @"Lolas Tobak";
+    NSAssert(destinationMapItem != nil, @"The caller is responsible of just requesting this if available.");
+    return destinationMapItem;
+}
+
 #pragma mark Update visible region
 
 - (void)updateVisibleRegion
@@ -146,12 +187,8 @@
 - (void)startRouting
 {
     if (self.locationAvailable) {
-        CLLocationCoordinate2D startCoordinate = self.mapView.userLocation.coordinate;
-        MKPlacemark *startPlacemark = [[MKPlacemark alloc] initWithCoordinate:startCoordinate addressDictionary:nil];
-        MKMapItem *startMapItem = [[MKMapItem alloc] initWithPlacemark:startPlacemark];
-        CLLocationCoordinate2D endCoordinate = self.destinationCoordinate;
-        MKPlacemark *endPlacemark = [[MKPlacemark alloc] initWithCoordinate:endCoordinate addressDictionary:nil];
-        MKMapItem *endMapItem = [[MKMapItem alloc] initWithPlacemark:endPlacemark];
+        MKMapItem *startMapItem = [self userLocationMapItem];
+        MKMapItem *endMapItem = [self destinationMapItem];
         [self findDirectionsFrom:startMapItem to:endMapItem];
     }
 }
@@ -165,10 +202,48 @@
     [self startRouting];
 }
 
+- (void)openMapsWithStatus:(kMapViewControllerOpenMaps *)status
+{
+    CLLocationCoordinate2D destinationCoordinate = self.destinationCoordinate;
+    if ((destinationCoordinate.latitude == kCLLocationCoordinate2DInvalid.latitude) &&
+        (destinationCoordinate.longitude == kCLLocationCoordinate2DInvalid.longitude)) {
+        if (status) {
+            *status = kMapViewControllerOpenMapsNoDestination;
+        }
+    } else {
+        if (self.locationAvailable) {
+            MKMapItem *startMapItem = [self userLocationMapItem];
+            MKMapItem *endMapItem = [self destinationMapItem];
+            BOOL transportartionByWalking = YES;
+            NSString *transportationMode = (transportartionByWalking) ?
+            MKLaunchOptionsDirectionsModeWalking : MKLaunchOptionsDirectionsModeDriving;
+            NSDictionary *launchOptionsBasic = @{MKLaunchOptionsDirectionsModeKey: transportationMode};
+            NSMutableDictionary *launchOptions = [NSMutableDictionary dictionaryWithDictionary:launchOptionsBasic];
+            if (!transportartionByWalking) {
+                [launchOptions setObject:@YES forKey:MKLaunchOptionsShowsTrafficKey];
+            }
+            [MKMapItem openMapsWithItems:@[startMapItem, endMapItem] launchOptions:launchOptions];
+            if (status) {
+                *status = kMapViewControllerOpenMapsRouting;
+            }
+        } else {
+            MKMapItem *endMapItem = [self destinationMapItem];
+            NSValue *centerCoordinate = [[NSValue alloc] initWithBytes:&destinationCoordinate objCType:@encode(CLLocationCoordinate2D)];
+            NSDictionary *launchOptions = @{MKLaunchOptionsMapCenterKey: centerCoordinate};
+            [MKMapItem openMapsWithItems:@[endMapItem] launchOptions:launchOptions];
+            if (status) {
+                *status = kMapViewControllerOpenMapsDestinationOnly;
+            }
+        }
+    }
+}
+
 - (void)stopRouting
 {
+    self.destinationCoordinate = kCLLocationCoordinate2DInvalid;
     self.shouldStartRouting = NO;
     [self removeDestinationAnnotation];
+    [self removeRoutePolyLine];
 }
 
 #pragma mark - Map directions
@@ -183,7 +258,7 @@
     MKDirections *directions = [[MKDirections alloc] initWithRequest:self.request];
     [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse *response, NSError *error) {
         if (error) {
-            NSAssert(NO, @"");
+//            NSAssert(NO, @"");
         } else {
             [self showDirectionsWithDirectionsResponsee:response];
         }
@@ -193,21 +268,13 @@
 - (void)showDirectionsWithDirectionsResponsee:(MKDirectionsResponse *)directionsResponse
 {
     self.directionsResponse = directionsResponse;
-#if 0
-    for (MKRoute *route in self.directionsResponse.routes) {
-        for (MKRouteStep *step in route.steps) {
-            NSLog(@"step: %@", step.instructions);
-        }
-        [self.mapView addOverlay:route.polyline level:MKOverlayLevelAboveRoads];
-    }
-#else
     MKRoute *route = self.directionsResponse.routes[0];
     [self.delegate mapViewController:self didSetRoutingSteps:route.steps];
     for (MKRouteStep *step in route.steps) {
         NSLog(@"step: %@", step.instructions);
     }
-    [self.mapView addOverlay:route.polyline level:MKOverlayLevelAboveRoads];
-#endif
+    self.routePolyLine = route.polyline;
+    [self addRoutePolyline];
 }
 
 #pragma mark - Map view delegate

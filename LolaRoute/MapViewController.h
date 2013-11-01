@@ -11,12 +11,19 @@
 
 @protocol MapViewControllerDelegate;
 
+typedef enum {
+    kMapViewControllerOpenMapsDestinationOnly = 1,
+    kMapViewControllerOpenMapsRouting = 2,
+    kMapViewControllerOpenMapsNoDestination = 3
+} kMapViewControllerOpenMaps;
+
 @interface MapViewController : UIViewController
 
 @property (weak, nonatomic) id <MapViewControllerDelegate> delegate;
 
 - (id)init;
 - (void)startRoutingToDestinationCoordinate:(CLLocationCoordinate2D)destinationCoordinate;
+- (void)openMapsWithStatus:(kMapViewControllerOpenMaps *)status;
 - (void)stopRouting;
 
 @end
