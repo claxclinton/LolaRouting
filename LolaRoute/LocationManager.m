@@ -92,7 +92,7 @@ typedef enum {
  */
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
-    NSLog(@"%s: Locations:%@",__PRETTY_FUNCTION__, locations);
+//    NSLog(@"%s: Locations:%@",__PRETTY_FUNCTION__, locations);
     [self.delegate locationManager:self movedToLocation:[locations lastObject]];
 }
 

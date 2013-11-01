@@ -6,13 +6,16 @@
 //  Copyright (c) 2013 Claes Lillieskold. All rights reserved.
 //
 
+#import <MapKit/MapKit.h>
 #import "ViewController.h"
 #import "MapViewController.h"
 
-@interface ViewController ()
+@interface ViewController () <MapViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) MapViewController *mapViewController;
 @property (strong, nonatomic) IBOutlet UIView *mapViewContainer;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSArray *routingSteps;
 
 @end
 
@@ -22,6 +25,7 @@
 {
     [super viewDidLoad];
     self.mapViewController = [[MapViewController alloc] init];
+    self.mapViewController.delegate = self;
     [self.mapViewContainer addSubview:_mapViewController.view];
     self.mapViewController.view.frame = _mapViewContainer.bounds;
 }
@@ -46,6 +50,37 @@
 
 - (IBAction)didPressMaps:(UIButton *)sender
 {
+}
+
+#pragma mark - Map view controller delegate
+
+- (void)mapViewController:(MapViewController *)mapViewController didSetRoutingSteps:(NSArray *)routingSteps
+{
+    self.routingSteps = routingSteps;
+    [self.tableView reloadData];
+}
+
+#pragma mark - Routing steps table view
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.routingSteps count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    }
+    MKRouteStep *routeStep = self.routingSteps[indexPath.row];
+    cell.textLabel.text = routeStep.instructions;
+    return cell;
 }
 
 @end

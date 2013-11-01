@@ -16,6 +16,10 @@
                                 <rect key="frame" x="0.0" y="308" width="320" height="174"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="vXZ-lx-hvc" id="G2R-fL-mda"/>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="PT2-Cn-LaQ"/>
+                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="f3M-Ti-5vj">
                                 <rect key="frame" x="32" y="517" width="46" height="30"/>
@@ -57,6 +61,7 @@
                     </view>
                     <connections>
                         <outlet property="mapViewContainer" destination="y16-8n-slq" id="uJl-DV-rWL"/>
+                        <outlet property="tableView" destination="qWE-y6-QUM" id="3l5-xT-2ME"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

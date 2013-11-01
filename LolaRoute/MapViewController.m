@@ -19,6 +19,7 @@
 @property (strong, nonatomic) MKPointAnnotation *destinationAnnotation;
 @property (strong, nonatomic) MKDirectionsRequest *request;
 @property (strong, nonatomic) MKDirectionsResponse *directionsResponse;
+@property (assign, nonatomic) BOOL shouldStartRouting;
 
 @end
 
@@ -96,6 +97,10 @@
         self.mapView.showsUserLocation = locationAvailable;
         [self updateVisibleRegion];
     }
+    
+    if (locationAvailable && self.shouldStartRouting) {
+        [self startRouting];
+    }
 }
 
 #pragma mark - Route
@@ -138,15 +143,31 @@
     }
 }
 
+- (void)startRouting
+{
+    if (self.locationAvailable) {
+        CLLocationCoordinate2D startCoordinate = self.mapView.userLocation.coordinate;
+        MKPlacemark *startPlacemark = [[MKPlacemark alloc] initWithCoordinate:startCoordinate addressDictionary:nil];
+        MKMapItem *startMapItem = [[MKMapItem alloc] initWithPlacemark:startPlacemark];
+        CLLocationCoordinate2D endCoordinate = self.destinationCoordinate;
+        MKPlacemark *endPlacemark = [[MKPlacemark alloc] initWithCoordinate:endCoordinate addressDictionary:nil];
+        MKMapItem *endMapItem = [[MKMapItem alloc] initWithPlacemark:endPlacemark];
+        [self findDirectionsFrom:startMapItem to:endMapItem];
+    }
+}
+
 - (void)startRoutingToDestinationCoordinate:(CLLocationCoordinate2D)destinationCoordinate
 {
     self.destinationCoordinate = destinationCoordinate;
     [self addDestinationAnnotation];
     [self updateVisibleRegion];
+    self.shouldStartRouting = YES;
+    [self startRouting];
 }
 
 - (void)stopRouting
 {
+    self.shouldStartRouting = NO;
     [self removeDestinationAnnotation];
 }
 
@@ -172,11 +193,21 @@
 - (void)showDirectionsWithDirectionsResponsee:(MKDirectionsResponse *)directionsResponse
 {
     self.directionsResponse = directionsResponse;
+#if 0
     for (MKRoute *route in self.directionsResponse.routes) {
-//        NSString *text = self.textField.text;
-//        NSString *updateText = [text stringByAppendingString:route];
+        for (MKRouteStep *step in route.steps) {
+            NSLog(@"step: %@", step.instructions);
+        }
         [self.mapView addOverlay:route.polyline level:MKOverlayLevelAboveRoads];
     }
+#else
+    MKRoute *route = self.directionsResponse.routes[0];
+    [self.delegate mapViewController:self didSetRoutingSteps:route.steps];
+    for (MKRouteStep *step in route.steps) {
+        NSLog(@"step: %@", step.instructions);
+    }
+    [self.mapView addOverlay:route.polyline level:MKOverlayLevelAboveRoads];
+#endif
 }
 
 #pragma mark - Map view delegate

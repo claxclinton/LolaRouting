@@ -20,3 +20,8 @@
 - (void)stopRouting;
 
 @end
+
+@protocol MapViewControllerDelegate
+- (void)mapViewController:(MapViewController *)mapViewController didSetRoutingSteps:(NSArray *)routingSteps;
+@end
+
